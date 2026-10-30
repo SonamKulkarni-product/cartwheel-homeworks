@@ -1,3 +1,29 @@
+# My Cartwheel HW1: Implementing and Evaluating a Support Agent
+
+This is my working fork of the [Cartwheel course repository](https://github.com/ai-evals-course/cartwheel-homeworks) for *Evaluating and Improving AI Agents*. The course provides the application scaffold, specification, policies, and synthetic commerce data.
+
+For Homework 1, I implemented five support tools: policy lookup, product search, authenticated order listing, order cancellation, and order search. I also revised the agent’s instructions and clarified parts of the specification based on observed behavior.
+
+## Evidence and findings
+
+The repository contains 14 baseline conversations across shopper, merchant, and support roles, plus three email-change escalation retests.
+
+- [Combined assessment](hw1-assessment.json): 10 passes and seven failures against each conversation’s primary requirement.
+- [Baseline conversations](hw1-session.jsonl): requests, tool calls, results, responses, and assessment notes.
+- [Final email-change retest](hw1-retest-email-03.jsonl): the agent called the escalation tool and confirmed success after receiving a ticket.
+
+The failures were useful: the agent sometimes invented a refund explanation, missed a store-specific return window, omitted policy citations, or showed only part of an order list without explaining the omission. An email-change request also revealed that offering to escalate is different from actually creating a support ticket.
+
+## Scope and limitations
+
+This is a course learning project using synthetic data, not a production support system. Assessments were performed with AI assistance and are labeled in the records. Some requirements were added after the baseline conversations and applied retrospectively.
+
+The recorded results span different prompt versions and include repeated cases; they should not be interpreted as a general accuracy benchmark. The final successful escalation retest demonstrates one observed improvement, not guaranteed reliability.
+
+The original course setup instructions follow below.
+
+---
+
 # Cartwheel course repository
 
 > [!IMPORTANT]
