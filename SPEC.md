@@ -58,6 +58,8 @@ outside the caller's role. Authorization is not a prompt.
 | Cancel order | own, pre-shipment | own store's | any |
 | Above-threshold refund | queued for human | queued for human | queued for human |
 
+Cancellation permissions determine which orders a caller may access. For every role, including support, cancellation is permitted only when the order status is placed.
+
 The threshold is `refund_auto_approve_threshold_usd` in `facts.yaml` ($100).
 
 ## 4. Tools
@@ -90,6 +92,8 @@ Successful results contain `ok: true` and the result fields. Expected failures c
 | `cancel_order` | `order_id` and `status: cancelled` after updating an authorized order whose current status is `placed`. | `not_found` for an unknown order; `permission_denied` for an unauthorized caller; `not_eligible` when the order is no longer `placed`; `paused` when cancellations are disabled. |
 | `escalate_to_human` | `ticket_id` and `sla_hours` after creating the support ticket. | Execution exception if ticket creation fails. |
 
+Tools returning policy-derived facts, such as refund processing times, must include the relevant policy identifiers.
+
 ## 5. Escalation policy
 
 The following cases always go to a human:
@@ -109,3 +113,6 @@ Requirements that do not fit in the sections above, including tone and style gui
 - **RESP-3.** State when required information is missing or inconsistent, rather than inventing a value.
 - **RESP-4.** Explain refusals and escalations without revealing inaccessible order or user information.
 - **RESP-5.** Use direct and respectful language that explains the relevant decision.
+- **RESP-6.** When answering a store-specific policy question, retrieve the store’s policy and apply any override before using the platform default.
+- **RESP-7.** When displaying only some returned orders, state how many are shown, how many were returned, and offer to show the remaining records.
+
